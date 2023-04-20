@@ -2,7 +2,7 @@ var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
 var imageWidth = 1080;
-var imageHeight = 1920;
+var imageHeight = 1080;
 
 var imageObj = new Image(imageWidth,imageHeight);
 
@@ -23,7 +23,7 @@ function DownloadCanvasAsImage(){
     });
 }
 
-imageObj.src = "assets/images/index.jpg"; 
+imageObj.src = "assets/images/eid.jpg"; 
 
 var downloadCardButton = document.getElementById('downloadCard');
 downloadCardButton.addEventListener('click', function(e){
@@ -38,11 +38,11 @@ downloadCardButton.addEventListener('click', function(e){
     context.font = "40pt Bahij";
 
     // text color
-    context.fillStyle = '#535BAE';
+    context.fillStyle = '#FFFFFF';
 
     // center and make text
     textWidth = (imageWidth - imageWidth / 1.95)
-    textHeight = (imageHeight - 640)
+    textHeight = (imageHeight - 170)
     
     context.fillText(text, textWidth, textHeight);
 
