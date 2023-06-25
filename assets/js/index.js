@@ -23,7 +23,7 @@ function DownloadCanvasAsImage(){
     });
 }
 
-imageObj.src = "assets/images/eid.jpg"; 
+imageObj.src = "assets/images/Eid-Adha-Ar.jpg"; 
 
 var downloadCardButton = document.getElementById('downloadCard');
 downloadCardButton.addEventListener('click', function(e){
@@ -38,7 +38,7 @@ downloadCardButton.addEventListener('click', function(e){
     context.font = "40pt Bahij";
 
     // text color
-    context.fillStyle = '#FFFFFF';
+    context.fillStyle = '#41B891';
 
     // center and make text
     textWidth = (imageWidth - imageWidth / 1.95)

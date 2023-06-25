@@ -11,7 +11,10 @@ body {
     font-family: "Bahij";
     src: url(../fonts/Bahij.ttf);
 }
-
+@font-face {
+    font-family: "Calibri";
+    src: url(../fonts/CalibriBold.ttf);
+}
 
 #myCanvas{
     font-family: "Bahij";
