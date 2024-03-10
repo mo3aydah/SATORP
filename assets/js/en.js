@@ -1,8 +1,8 @@
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
-var imageWidth = 1080;
-var imageHeight = 1080;
+var imageWidth = 1661;
+var imageHeight = 1661;
 
 var imageObj = new Image(imageWidth,imageHeight);
 
@@ -23,7 +23,7 @@ function DownloadCanvasAsImage(){
     });
 }
 
-imageObj.src = "assets/images/Eid-Adha-En.jpg"; 
+imageObj.src = "assets/images/ramadan.jpg"; 
 
 var downloadCardButton = document.getElementById('downloadCard');
 downloadCardButton.addEventListener('click', function(e){
