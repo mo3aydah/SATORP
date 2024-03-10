@@ -1,56 +1,56 @@
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
-var imageWidth = 1661;
-var imageHeight = 1661;
+// Set canvas dimensions
+var canvasWidth = 1661;
+var canvasHeight = 1661;
+canvas.width = canvasWidth;
+canvas.height = canvasHeight;
 
-var imageObj = new Image(imageWidth,imageHeight);
+var imageObj = new Image();
 
-imageObj.onload = function()
-{
-    context.drawImage(imageObj, 0, 0);
-}
+// It's good practice to set the src attribute after defining onload.
+imageObj.onload = function() {
+    // Ensure the canvas and the image have the same dimensions for proper scaling
+    context.drawImage(imageObj, 0, 0, canvasWidth, canvasHeight);
+};
+imageObj.src = "assets/images/ramadan.jpg"; // Make sure this path is correct and accessible
 
 function DownloadCanvasAsImage(){
     let imageName = "moa3aydah.png";
     let downloadLink = document.createElement('a');
     downloadLink.setAttribute('download', imageName);
-    let canvas = document.getElementById('myCanvas');
     canvas.toBlob(function(blob) {
-    let url = URL.createObjectURL(blob);
-    downloadLink.setAttribute('href', url);
-    downloadLink.click();
+        let url = URL.createObjectURL(blob);
+        downloadLink.setAttribute('href', url);
+        downloadLink.click();
     });
 }
 
-imageObj.src = "assets/images/ramadan.jpg"; 
-
 var downloadCardButton = document.getElementById('downloadCard');
 downloadCardButton.addEventListener('click', function(e){
-    // clear canvas from text and draw image Regards,
-    context.clearRect(0, 0, imageWidth, imageHeight);
-    context.drawImage(imageObj, 0, 0);
+    // Clear canvas from text and draw image Regards,
+    context.clearRect(0, 0, canvasWidth, canvasHeight);
+    context.drawImage(imageObj, 0, 0, canvasWidth, canvasHeight);
 
     var text = document.getElementById('name').value;
 
-    // custom font
+    // Custom font
     context.textAlign = 'center';
     context.font = "40pt Calibri";
 
-    // text color
+    // Text color
     context.fillStyle = '#2D378E';
 
-    // center and make text
-    textWidth = (imageWidth - imageWidth / 1.95)
-    textHeight = (imageHeight - 170)
+    // Calculate center for the text
+    var textWidth = canvasWidth / 2;
+    var textHeight = canvasHeight - 170; // Adjust based on where you want the text
     
     context.fillText(text, textWidth, textHeight);
 
     e.preventDefault();
     document.getElementById('name').value = "";
 
-    // download the image
+    // Download the image
     DownloadCanvasAsImage();
 });
-
-
