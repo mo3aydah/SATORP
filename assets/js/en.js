@@ -38,7 +38,7 @@ downloadCardButton.addEventListener('click', function(e){
     context.font = "40pt Calibri";
 
     // text color
-    context.fillStyle = '#41B891';
+    context.fillStyle = '#2D378E';
 
     // center and make text
     textWidth = (imageWidth - imageWidth / 1.95)

@@ -20,7 +20,7 @@ imageObj.onload = function() {
 imageObj.src = "assets/images/ramadan.jpg";
 
 function DownloadCanvasAsImage(){
-    let imageName = "ramadan.jpg";
+    let imageName = "moa3aydah.png";
     let downloadLink = document.createElement('a');
     downloadLink.setAttribute('download', imageName);
     let canvas = document.getElementById('myCanvas');
@@ -43,7 +43,7 @@ downloadCardButton.addEventListener('click', function(e){
    
     context.font = "40pt Bahij";
     context.textAlign = 'center';
-    context.fillStyle = '#41B891';
+    context.fillStyle = '#2D378E';
     var textX = imageWidth / 2; 
     var textY = imageHeight - 170; 
 
