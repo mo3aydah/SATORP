@@ -13,7 +13,7 @@ body {
 }
 @font-face {
     font-family: "Calibri";
-    src: url(../fonts/CalibriBold.ttf);
+    src: url(../fonts/Calibri-Regular.ttf);
 }
 
 #myCanvas{

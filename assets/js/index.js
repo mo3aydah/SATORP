@@ -2,8 +2,8 @@ var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
 
-var imageWidth = 1661;
-var imageHeight = 1661;
+var imageWidth = 1080;
+var imageHeight = 1080;
 canvas.width = imageWidth;
 canvas.height = imageHeight;
 
@@ -17,7 +17,7 @@ imageObj.onload = function() {
 };
 
 
-imageObj.src = "assets/images/ramadan.jpg";
+imageObj.src = "assets/images/employee-Eid-Greetings-Arabic.jpg";
 
 function DownloadCanvasAsImage(){
     let imageName = "moa3aydah.png";
@@ -43,9 +43,9 @@ downloadCardButton.addEventListener('click', function(e){
    
     context.font = "40pt Bahij";
     context.textAlign = 'center';
-    context.fillStyle = '#2D378E';
+    context.fillStyle = '#FFFFFF';
     var textX = imageWidth / 2; 
-    var textY = imageHeight - 170; 
+    var textY = 700; 
 
 
     context.fillText(text, textX, textY);
