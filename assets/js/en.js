@@ -37,14 +37,14 @@ downloadCardButton.addEventListener('click', function(e){
 
    
     context.textAlign = 'center';
-    context.font = "40pt Calibri";
+    context.font = "35pt Calibri";
 
 
     context.fillStyle = '#FFFFFF';
 
    
     var textWidth = canvasWidth / 2;
-    var textHeight = canvasHeight - 400; 
+    var textHeight = canvasHeight - 200; 
     
     context.fillText(text, textWidth, textHeight);
 

@@ -17,7 +17,7 @@ imageObj.onload = function() {
 };
 
 
-imageObj.src = "assets/images/employee-Eid-Greetings-Arabic.jpg";
+imageObj.src = "assets/images/employee-Eid-Greetings-Arabic-.jpg";
 
 function DownloadCanvasAsImage(){
     let imageName = "moa3aydah.png";
@@ -41,11 +41,11 @@ downloadCardButton.addEventListener('click', function(e){
     var text = document.getElementById('name').value;
 
    
-    context.font = "40pt Bahij";
+    context.font = "35pt Bahij";
     context.textAlign = 'center';
     context.fillStyle = '#FFFFFF';
     var textX = imageWidth / 2; 
-    var textY = 700; 
+    var textY = 900; 
 
 
     context.fillText(text, textX, textY);
