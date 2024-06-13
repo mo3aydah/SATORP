@@ -1,7 +1,6 @@
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
-
 var canvasWidth = 1080;
 var canvasHeight = 1272;
 canvas.width = canvasWidth;
@@ -9,9 +8,7 @@ canvas.height = canvasHeight;
 
 var imageObj = new Image();
 
-
 imageObj.onload = function() {
-   
     context.drawImage(imageObj, 0, 0, canvasWidth, canvasHeight);
 };
 imageObj.src = "assets/images/employee-Eid-Greetings-English.jpg"; 
@@ -29,20 +26,21 @@ function DownloadCanvasAsImage(){
 
 var downloadCardButton = document.getElementById('downloadCard');
 downloadCardButton.addEventListener('click', function(e){
-   
     context.clearRect(0, 0, canvasWidth, canvasHeight);
     context.drawImage(imageObj, 0, 0, canvasWidth, canvasHeight);
 
     var text = document.getElementById('name').value;
-
-   
+    
+    // Check if the input text contains Arabic characters
+    var arabic = /[\u0600-\u06FF]/;
+    if (arabic.test(text)) {
+        context.font = "35pt Bahij_TheSansArabic-Bold";
+    } else {
+        context.font = "35pt Calibri";
+    }
+    
     context.textAlign = 'center';
-    context.font = "35pt Calibri";
-
-
     context.fillStyle = '#FFFFFF';
-
-   
     var textWidth = canvasWidth / 2;
     var textHeight = canvasHeight - 200; 
     
@@ -51,6 +49,5 @@ downloadCardButton.addEventListener('click', function(e){
     e.preventDefault();
     document.getElementById('name').value = "";
 
- 
     DownloadCanvasAsImage();
 });

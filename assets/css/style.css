@@ -1,38 +1,35 @@
+@font-face {
+    font-family: "Bahij_TheSansArabic-Bold";
+    src: url("../fonts/Bahij_TheSansArabic-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Calibri";
+    src: url("../fonts/CalibriBold.TTF");
+}
+
+body {
+    font-family: "Calibri";
+    background: url("../../assets/images/background-color.jpg");
+}
+
 .image {
     width: 100%;
     height: 100%;
 }
 
-body {
-    background: url("../../assets/images/background-color.jpg");
-}
-
-@font-face {
-    font-family: "Bahij";
-    src: url(../fonts/Bahij.ttf);
-}
-@font-face {
-    font-family: "Calibri";
-    src: url(../fonts/CalibriBold.TTF);
-}
-
-#myCanvas{
-    font-family: "Calibri";
+#myCanvas {
+    font-family: "Bahij_TheSansArabic-Bold"; /* Default to Bahij */
     max-height: 800px;
 }
-
 
 .container {
     display: block;
     margin: auto;
     height: auto;
-  }
+}
 
 canvas {
     max-width: 100%;
     object-fit: contain;
-}
-
-body{
-    font-family: "Calibri";
 }
