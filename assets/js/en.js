@@ -8,10 +8,15 @@ canvas.height = canvasHeight;
 
 var imageObj = new Image();
 
+// Add console logs for debugging
 imageObj.onload = function() {
+    console.log('Image loaded successfully');
     context.drawImage(imageObj, 0, 0, canvasWidth, canvasHeight);
 };
-imageObj.src = "assets/images/employee-Eid-Greetings-English.jpg"; 
+imageObj.onerror = function() {
+    console.error('Failed to load image.');
+};
+imageObj.src = "assets/images/employee-Eid-Greetings-English.jpg"; // Adjust the image source for the Arabic version
 
 function DownloadCanvasAsImage(){
     let imageName = "moa3aydah.png";
@@ -30,11 +35,11 @@ downloadCardButton.addEventListener('click', function(e){
     context.drawImage(imageObj, 0, 0, canvasWidth, canvasHeight);
 
     var text = document.getElementById('name').value;
-    
+
     // Check if the input text contains Arabic characters
     var arabic = /[\u0600-\u06FF]/;
     if (arabic.test(text)) {
-        context.font = "35pt Bahij_TheSansArabic-Bold";
+        context.font = "35pt 'Bahij_TheSansArabic-Bold'";
     } else {
         context.font = "35pt Calibri";
     }
@@ -44,6 +49,7 @@ downloadCardButton.addEventListener('click', function(e){
     var textWidth = canvasWidth / 2;
     var textHeight = canvasHeight - 200; 
     
+    // Draw the text
     context.fillText(text, textWidth, textHeight);
 
     e.preventDefault();

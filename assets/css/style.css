@@ -1,15 +1,15 @@
 @font-face {
     font-family: "Bahij_TheSansArabic-Bold";
-    src: url("../fonts/Bahij_TheSansArabic-Bold.ttf");
+    src: url("../fonts/Bahij_TheSansArabic-Bold.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "Calibri";
-    src: url("../fonts/CalibriBold.TTF");
+    src: url("../fonts/CalibriBold.TTF") format("truetype");
 }
 
 body {
-    font-family: "Calibri";
+    font-family: "Calibri", sans-serif;
     background: url("../../assets/images/background-color.jpg");
 }
 
@@ -19,7 +19,7 @@ body {
 }
 
 #myCanvas {
-    font-family: "Bahij_TheSansArabic-Bold"; /* Default to Bahij */
+    font-family: "Bahij_TheSansArabic-Bold"; /* Default font for Arabic */
     max-height: 800px;
 }
 
