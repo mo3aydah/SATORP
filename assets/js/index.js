@@ -2,7 +2,7 @@ var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
 var canvasWidth = 1080;
-var canvasHeight = 1272;
+var canvasHeight = 1080;
 canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 
@@ -16,7 +16,7 @@ imageObj.onload = function() {
 imageObj.onerror = function() {
     console.error('Failed to load image.');
 };
-imageObj.src = "assets/images/employee-Eid-Greetings-Arabic-.jpg"; // Adjust the image source for the Arabic version
+imageObj.src = "assets/images/Greeting-message-employee-ARA.jpg"; // Adjust the image source for the Arabic version
 
 function DownloadCanvasAsImage(){
     let imageName = "moa3aydah.png";
@@ -39,13 +39,15 @@ downloadCardButton.addEventListener('click', function(e){
     // Check if the input text contains Arabic characters
     var arabic = /[\u0600-\u06FF]/;
     if (arabic.test(text)) {
-        context.font = "35pt 'Bahij_TheSansArabic-Bold'";
+        context.font = "35pt Satorp, sans-serif";
+
     } else {
-        context.font = "35pt Calibri";
+        context.font = "35pt Satorp, sans-serif";
+
     }
     
     context.textAlign = 'center';
-    context.fillStyle = '#FFFFFF';
+    context.fillStyle = '#2D378D';
     var textWidth = canvasWidth / 2;
     var textHeight = canvasHeight - 200; 
     
@@ -54,6 +56,11 @@ downloadCardButton.addEventListener('click', function(e){
 
     e.preventDefault();
     document.getElementById('name').value = "";
+    document.fonts.ready.then(() => {
+        context.font = "35pt Satorp, sans-serif";
+        context.fillText(text, textWidth, textHeight);
+    });
+    
 
     DownloadCanvasAsImage();
 });

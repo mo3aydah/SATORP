@@ -1,11 +1,12 @@
 @font-face {
     font-family: "Bahij_TheSansArabic-Bold";
-    src: url("../fonts/Bahij_TheSansArabic-Bold.ttf") format("truetype");
+    src: url("../../assets/fonts/Satorp-Medium.otf") format("opentype");
+
 }
 
 @font-face {
-    font-family: "Calibri";
-    src: url("../fonts/CalibriBold.TTF") format("truetype");
+    font-family: "Satorp";
+    src: url("../fonts/Satorp-Medium.otf") format("truetype");
 }
 
 body {
@@ -19,7 +20,7 @@ body {
 }
 
 #myCanvas {
-    font-family: "Bahij_TheSansArabic-Bold"; /* Default font for Arabic */
+    font-family: "Satorp"; /* Default font for Arabic */
     max-height: 800px;
 }
 
@@ -33,3 +34,22 @@ canvas {
     max-width: 100%;
     object-fit: contain;
 }
+
+footer {
+
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px 0;
+}
+
+footer a {
+  
+    font-weight: bold;
+    color: white !important;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
