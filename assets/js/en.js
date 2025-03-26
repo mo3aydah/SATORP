@@ -45,9 +45,9 @@ downloadCardButton.addEventListener('click', function(e){
     }
     
     context.textAlign = 'center';
-    context.fillStyle = '#2D378D';
+    context.fillStyle = 'white';
     var textWidth = canvasWidth / 2;
-    var textHeight = canvasHeight - 200; 
+    var textHeight = canvasHeight - 300; 
     
     // Draw the text
     context.fillText(text, textWidth, textHeight);
