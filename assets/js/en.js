@@ -39,13 +39,13 @@ downloadCardButton.addEventListener('click', function(e){
     // Check if the input text contains Arabic characters
     var arabic = /[\u0600-\u06FF]/;
     if (arabic.test(text)) {
-        context.font = "35pt 'Satorp'";
+        context.font = "300 35pt Satorp";
     } else {
-        context.font = "35pt Satorp";
+        context.font = "300 35pt Satorp";
     }
     
     context.textAlign = 'center';
-    context.fillStyle = 'white';
+    context.fillStyle = '#2F388D';
     var textWidth = canvasWidth / 2;
     var textHeight = canvasHeight - 300; 
     
