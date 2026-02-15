@@ -11,33 +11,80 @@
 </head>
 <body>
     <div class="container mt-3">
-        <div class="row">
-            <div class="imageCover text-center">
-                <canvas id="myCanvas" height="1272" width="1080"></canvas>
+        <!-- Step indicator -->
+        <div class="step-indicator mb-2" dir="ltr" role="navigation" aria-label="Card creation steps">
+            <div class="step-item" aria-label="Step 1 of 3: Message">
+                <span class="step-dot" data-step="1" aria-current="step">1</span>
+                <span class="step-caption">Message</span>
+            </div>
+            <span class="step-line" aria-hidden="true"></span>
+            <div class="step-item" aria-label="Step 2 of 3: Name">
+                <span class="step-dot" data-step="2">2</span>
+                <span class="step-caption">Name</span>
+            </div>
+            <span class="step-line" aria-hidden="true"></span>
+            <div class="step-item" aria-label="Step 3 of 3: Preview">
+                <span class="step-dot" data-step="3">3</span>
+                <span class="step-caption">Preview</span>
             </div>
         </div>
-        <div class="form-group">
-            <div class="row mt-1 g-3 justify-content-center">
-                <div class="col-auto">
-                    <input type="text" class="form-control" name="name" id="name" required placeholder="Name" dir="ltr" />
+        <!-- Card preview (visible in all steps) -->
+        <div class="card-preview-wrap mb-4" id="cardPreviewWrap">
+            <div class="card-preview-loading" id="cardPreviewLoading" aria-live="polite">Loading your card...</div>
+            <div class="imageCover text-center">
+                <canvas id="myCanvas" height="1080" width="1080"></canvas>
+            </div>
+        </div>
+
+        <!-- Step 1: Choose message -->
+        <div id="step1" class="card-step step-visible" role="region" aria-label="Step 1: Choose your message">
+            <h2 class="text-white mb-3">Choose your message</h2>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 d-flex flex-column gap-2">
+                    <div id="messageOptions" class="d-flex flex-column gap-2" dir="ltr"></div>
+                    <button type="button" id="step1Next" class="btn btn-light btn-lg w-100 mt-2" disabled>Continue</button>
                 </div>
             </div>
-            <div class="row justify-content-center mt-3 pb-3">
-                <div class="col-auto">
-                    <button type="button" id="downloadCard" class="btn btn-light">Download Image</button>
+        </div>
+
+        <!-- Step 2: Enter name -->
+        <div id="step2" class="card-step" role="region" aria-label="Step 2: Enter your name" hidden>
+            <h2 class="text-white mb-3">Enter your name</h2>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8">
+                    <input type="text" class="form-control form-control-lg" name="name" id="name" required placeholder="Your name" dir="ltr" />
+                    <p class="name-helper mt-2 mb-0">This name will appear on the card.</p>
+                    <p class="name-error mt-1 mb-0" id="nameError" role="alert" hidden>Please enter your name.</p>
+                </div>
+                <div class="col-12 col-md-8 mt-4 d-flex flex-column gap-2">
+                    <button type="button" id="step2Back" class="btn btn-outline-light w-100">Back</button>
+                    <button type="button" id="step2Next" class="btn btn-light btn-lg w-100" disabled>Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Preview and download -->
+        <div id="step3" class="card-step" role="region" aria-label="Step 3: Preview and download" hidden>
+            <h2 class="text-white mb-3">Your personalized Ramadan greeting is ready</h2>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 d-flex flex-column gap-2">
+                    <button type="button" id="step3Back" class="btn btn-outline-light w-100">Back</button>
+                    <button type="button" id="downloadCard" class="btn btn-light btn-lg w-100">Download Image</button>
+                    <p id="downloadSuccess" class="download-success-badge mt-2 mb-0" role="status" aria-live="polite" hidden>Your card has been downloaded</p>
                 </div>
             </div>
         </div>
     </div>
 
     <footer class="text-center mt-5 py-3">
-        <p class="mb-0">Powered by 
-            <a href="https://6degrees.com.sa/en" target="_blank" class="text-decoration-none fw-bold" style="color: #2D378D;">
-                6 Degrees
+        <p class="mb-0">Powered by
+            <a href="https://6degrees.com.sa/en" target="_blank" rel="noopener" class="footer-link footer-logo-link">
+                <img src="assets/images/6degrees-logo.png" alt="6 Degrees" class="footer-logo" />
             </a>
         </p>
     </footer>
 
+    <script src="assets/js/config.js"></script>
     <script src="assets/js/en.js"></script>
 </body>
 </html>

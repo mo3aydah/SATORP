@@ -1,0 +1,66 @@
+---
+alwaysApply: true
+---
+
+# Tech Context: Technical Environment Specification
+
+## Technologies Used
+
+| Category        | Technology / Detail |
+|----------------|---------------------|
+| Markup         | HTML5               |
+| Styling        | CSS3, Bootstrap 5.1.3 (CDN) |
+| Scripting      | Vanilla JavaScript (ES5-style, no build step) |
+| Image generation | Canvas API (2D context) |
+| Fonts          | Satorp (OpenType: Medium, Bold, Light, Regular) |
+| Theme          | Solid background `#010822`; look and feel aligned with [6 Degrees](https://6degrees.com.sa/en) (dark, clean, professional). No background image. |
+
+## Project Structure (Relevant Paths)
+
+```
+/
+├── index.html              # Language selector (Arabic / English links)
+├── ar.html                 # Arabic card flow (message options + canvas + name + download)
+├── en.html                 # English card flow (message options + canvas + name + download)
+├── README.md
+├── assets/
+│   ├── css/
+│   │   └── style.css      # Global styles, @font-face, canvas/layout, .message-option
+│   ├── js/
+│   │   ├── config.js      # MESSAGES.ar, MESSAGES.en (three options each)
+│   │   ├── index.js       # Arabic: message options + canvas + name + download
+│   │   └── en.js          # English: message options + canvas + name + download
+│   ├── images/
+│   │   ├── Satorp - Ramadan Design (Employees greeting).png  # card background (shared AR/EN)
+│   │   └── (other assets; background-color.png no longer used — app uses solid #010822)
+│   └── fonts/
+│       ├── Satorp-Medium.otf
+│       ├── Satorp-Bold.otf
+│       ├── Satorp-Light.otf
+│       └── Satorp-Regular.otf
+└── .cursor/
+    └── rules/
+        ├── project_description.mdc
+        └── memory_bank/
+            └── (this Memory Bank)
+```
+
+## Dependencies (External)
+- **Bootstrap 5.1.3:** CDN (jsdelivr), integrity hash in HTML. Used for layout and form controls.
+- No npm/node or package manager required for current setup.
+- No external APIs.
+
+## Critical Technical Details
+- **Canvas dimensions:** 1080×1080 (internal); display is constrained by CSS (`max-width: 100%`, `max-height: 800px` for `#myCanvas`).
+- **Text on card:** `context.font = "300 35pt Satorp"`, `context.fillStyle = '#2F388D'`, `context.textAlign = 'center'`. Name position: `canvasWidth / 2`, `canvasHeight - 300`. When adding the chosen message, positions must be defined (e.g. message above or below name).
+- **Download:** Filename `moa3aydah.png`; implemented via `<a download>` and `URL.createObjectURL(blob)` from `canvas.toBlob()`.
+- **RTL/LTR:** Arabic page uses `dir="rtl"` and Arabic placeholder/labels; English uses `dir="ltr"` and English labels. Canvas text alignment may need to account for RTL when drawing Arabic (e.g. `direction` or positioning).
+
+## Development Environment
+- Static file server or open-in-browser is sufficient (e.g. `file://` or any static host).
+- No build, transpilation, or bundling in current setup.
+- Browsers: Standard modern browsers with Canvas and Blob support (desktop and mobile).
+
+## Constraints
+- No server-side logic; all state is in the current page (and, when implemented, in JS variables for chosen language and chosen message).
+- Asset paths in JS are relative to the HTML file (e.g. `assets/images/...`, `assets/fonts/...`). Keep this consistent when adding new assets.

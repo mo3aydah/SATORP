@@ -1,0 +1,27 @@
+---
+alwaysApply: true
+---
+
+# Project Brief: SATORP Digitized Greeting Card
+
+## Purpose
+This document is the source of truth for the project's core requirements, goals, and scope. All Memory Bank files and development work must align with this brief.
+
+## Primary Objectives
+- Enable SATORP employees to create a **personalized digital greeting card** (e.g. Ramadan) that they can download and share with family and friends.
+- Deliver the experience as part of the **mo3aydah** concept, powered by **6 Degrees**.
+
+## Key Deliverables
+1. **Single entry point** with language selection (Arabic / English).
+2. **Three predefined message options** per language; user selects one to appear on the card.
+3. **Name input** so the user’s name is rendered on the card.
+4. **Downloadable image** (PNG) combining: card background + chosen message text + user’s name, using Satorp font and brand color.
+
+## Scope and Boundaries
+- **In scope:** Web app only (static site). No backend, no user accounts, no persistence beyond the generated image.
+- **Out of scope:** Editing the predefined messages by end users; multiple card designs in one session; social sharing from the app (user shares the downloaded file themselves).
+- **Constraints:** Must support Arabic (RTL) and English (LTR); must preserve SATORP/6 Degrees branding (font, color `#2F388D`, footer).
+
+## Stakeholder Expectations
+- Employees get a simple, fast flow: choose language → choose one of three messages → enter name → download.
+- The final image is suitable for sharing (e.g. social, messaging) and reflects the intended greeting and personalization.

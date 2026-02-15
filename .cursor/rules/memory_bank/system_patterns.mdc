@@ -1,0 +1,46 @@
+---
+alwaysApply: true
+---
+
+# System Patterns: Architecture and Technical Decisions
+
+## High-Level Architecture
+
+The application is a **static, client-only web app**. All logic runs in the browser; there is no server-side application or database.
+
+```mermaid
+flowchart TD
+    subgraph Client["Client (Browser)"]
+        HTML["HTML Pages\n(index, ar.html, en.html)"]
+        JS["JavaScript\n(config.js, index.js, en.js)"]
+        CSS["style.css"]
+        Canvas["Canvas API\n(draw + export PNG)"]
+        HTML --> JS
+        HTML --> CSS
+        JS --> Canvas
+    end
+    Assets["Static Assets\n(images, fonts)"]
+    JS --> Assets
+```
+
+*Description: Static assets and HTML/CSS/JS are loaded in the browser. JavaScript drives the Canvas API to draw the card and trigger PNG download. No backend.*
+
+## Current Structure
+- **Entry:** `index.html` = language selection only (links to `ar.html` and `en.html`).
+- **Arabic card flow:** `ar.html` loads `assets/js/config.js` then `assets/js/index.js`; uses shared card image `Satorp - Ramadan Design (Employees greeting).png`, RTL, Arabic labels; three message options from `MESSAGES.ar`.
+- **English card flow:** `en.html` loads `config.js` then `assets/js/en.js`; uses the same card image `Satorp - Ramadan Design (Employees greeting).png`, LTR, English labels; three message options from `MESSAGES.en`.
+
+**Decision:** Single entry with language selection; per-language card pages keep the flow simple and avoid a build step. Message options are in one place (`config.js`) for both the UI and canvas rendering.
+
+## Key Design Patterns
+- **Canvas-based image generation:** Background image is drawn on a 1080×1080 canvas; text (name, and in the future the chosen message) is drawn with `fillText` using Satorp font and `#2F388D`. Export via `canvas.toBlob()` and a temporary download link.
+- **No framework:** Vanilla HTML, CSS, and JavaScript with Bootstrap 5 for layout and form styling. Keeps the project lightweight and easy to host anywhere.
+- **Font loading:** Satorp is loaded via `@font-face` in CSS (Medium, Bold, Light, Regular). Canvas uses the same font family; `document.fonts.ready` is used where needed (e.g. Arabic in index.js) before drawing text.
+
+## Data Flow
+- User opens `index.html` → selects language (Arabic or English) → lands on `ar.html` or `en.html` → selects one of three messages from `config.js` → enters name → clicks download → script draws background + chosen message + name on canvas, downloads PNG.
+
+## Guidelines for Consistency
+- Store the three message options per language in one place (e.g. a `MESSAGES` object or config file) so the choice UI and the canvas rendering both use the same strings.
+- Keep card layout logic (positions, font size, color) in one place or clearly documented so adding the “chosen message” text does not duplicate magic numbers.
+- Card background: single image for both languages — `assets/images/Satorp - Ramadan Design (Employees greeting).png`.

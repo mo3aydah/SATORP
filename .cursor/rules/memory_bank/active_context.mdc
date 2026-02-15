@@ -1,0 +1,31 @@
+---
+alwaysApply: true
+---
+
+# Active Context: Current Operations Snapshot
+
+## Current Work Focus
+- The card flow is a **three-step process** after language selection. No critical next steps.
+
+## Implemented Flow
+1. **Language selection:** `index.html` → "العربية" → `ar.html`, "English" → `en.html`.
+2. **Step 1 — Choose message:** Only the three message options and a "Next" / "Continue" button. User must select one message to proceed.
+3. **Step 2 — Enter name:** Only the name input with "Back" (to step 1) and "Next" / "Continue" (to step 3).
+4. **Step 3 — Preview and download:** Canvas shows the full card (background + chosen message + name). "Back" (to step 2) and "Download" (PNG as `moa3aydah.png`).
+
+A step indicator (1–2–3) is shown at the top; only one step panel is visible at a time.
+
+## Current State of the Codebase
+- **Entry:** `index.html` = language selector.
+- **Card pages:** `ar.html`, `en.html` — each has three panels `#step1`, `#step2`, `#step3`; JS shows/hides them and updates the step dots. Canvas is only in step 3 and is drawn when entering step 3.
+- **Config:** `assets/js/config.js` (MESSAGES.ar, MESSAGES.en). Placeholder Ramadan copy.
+- **CSS:** `.step-indicator`, `.step-dot`, `.step-line`, `.step-dot.active`, `.step-dot.completed`, `.card-step`.
+
+## Active Decisions / Conventions
+- Exactly three message options per language in `config.js`. Three-step wizard: message → name → preview & download. Back allowed from step 2 to step 1 and from step 3 to step 2.
+
+## Optional Next Steps
+- Replace placeholder messages in `config.js`. Add "Change language" link on card pages to return to `index.html`.
+
+## Recent Significant Context
+- Flow refactored into an explicit three-step process after language: step 1 = choose message, step 2 = enter name, step 3 = preview and download. Step indicator and Back/Next navigation implemented on both ar.html and en.html.

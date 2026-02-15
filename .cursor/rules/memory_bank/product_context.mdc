@@ -1,0 +1,41 @@
+---
+alwaysApply: true
+---
+
+# Product Context: Why, What, and How
+
+## Why This Project Exists
+SATORP (with 6 Degrees) wants employees to easily create and share a branded greeting card (e.g. for Ramadan). The app solves the need for a **simple, no-login, mobile-friendly** way to personalize a card and get a shareable image.
+
+## Target Audience
+- **Primary:** SATORP employees.
+- **Use case:** Creating a greeting (e.g. Ramadan) to share with family and friends via the downloaded image.
+
+## Intended User Experience
+
+### User Flow (Target)
+1. **Language selection:** User lands on one page and selects Arabic or English.
+2. **Three-step process** on the card page:
+   - **Step 1 — Choose message:** Three predefined greeting messages; user picks one, then continues.
+   - **Step 2 — Enter name:** User enters name; can go Back to step 1 or Continue to step 3.
+   - **Step 3 — Preview and download:** Full card preview (background + message + name); user can Download PNG or Back to edit name.
+
+The diagram below summarizes the flow.
+
+```mermaid
+flowchart LR
+    A["Language"] --> B["Step 1:\nChoose Message"]
+    B --> C["Step 2:\nEnter Name"]
+    C --> D["Step 3:\nPreview & Download"]
+```
+
+*Description: After language selection, a strict three-step wizard: choose message → enter name → preview and download. Back navigation allows editing name or message.*
+
+## Critical Success Factors (User Perspective)
+- Clear, minimal steps; no confusion about what to do next.
+- Correct RTL/LTR and language-specific copy (Arabic vs English).
+- Downloaded image looks correct: readable text, proper layout, brand-consistent (Satorp, #2F388D).
+- Works on typical mobile and desktop browsers (no special plugins).
+
+## Product Vision Summary
+A single-page (or minimal multi-step) flow where the employee chooses language, picks one of three greeting messages, adds their name, and downloads a finished card image—all with consistent branding and no account required.

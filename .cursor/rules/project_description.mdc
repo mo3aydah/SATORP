@@ -1,0 +1,31 @@
+---
+alwaysApply: true
+---
+
+# SATORP Digitized Greeting Card
+
+## Summary
+Web app for SATORP employees to create a personalized greeting card (e.g. Ramadan), add their name, and download it as an image to share with family and friends. Delivered as part of the “mo3aydah” concept; powered by 6 Degrees.
+
+## Intended user flow
+1. **Language selection:** User selects language (Arabic or English) on a single entry page.
+2. **Three-step process** (on the chosen language page):
+   - **Step 1 — Choose message:** User sees **three options of text** (predefined greeting messages) and picks **one**. Then “Next” / “Continue”.
+   - **Step 2 — Enter name:** User enters their name in a text field (required). “Back” returns to step 1; “Next” goes to step 3.
+   - **Step 3 — Preview and download:** User sees a **preview** of the card (background + chosen message + name). “Download” saves the PNG (e.g. `moa3aydah.png`). “Back” returns to step 2 to edit name.
+
+So the card shows: background + chosen message (from the 3 options) + user’s name. The flow is explicitly three steps after language: message → name → preview & download.
+
+## Current implementation
+- Language selection on `index.html`; then `ar.html` or `en.html` with a **three-step wizard**: step 1 (message options + Next), step 2 (name + Back/Next), step 3 (canvas preview + Back/Download). Step indicator (1–2–3) and Back/Next navigation are implemented.
+
+## Technical context
+- **Stack:** Static HTML, vanilla JS, Bootstrap 5, Canvas API. Custom Satorp font (Medium/Bold/Light/Regular).
+- **Structure:** Separate pages per language (`ar.html`, `en.html`); both use the same card background image: `assets/images/Satorp - Ramadan Design (Employees greeting).png`.
+- **Branding:** Text on card uses color `#2F388D`; footer “Powered by 6 Degrees” with link. Canvas size 1080×1080; name drawn at a fixed vertical position (e.g. `canvasHeight - 300`).
+- **RTL/LTR:** Arabic page uses `dir="rtl"` and Arabic placeholder/labels; English uses `dir="ltr"` and English copy.
+
+## Conventions for changes
+- Keep Arabic and English experiences consistent in flow and layout; only copy and direction differ.
+- Preserve Satorp font and brand color for all text on the card (chosen message + name).
+- Provide exactly **three** message options per language; store them in a data structure or config so both the choice UI and the canvas rendering use the same strings.

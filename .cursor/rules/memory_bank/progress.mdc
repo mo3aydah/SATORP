@@ -1,0 +1,57 @@
+---
+alwaysApply: true
+---
+
+# Progress: Real-Time Ledger of Work
+
+## Task Status Legend
+- `[ ]` = Backlog  
+- `[>]` = To Do  
+- `[~]` = In Progress  
+- `[@]` = In Review  
+- `[x]` = Done  
+- `[-]` = Canceled  
+
+---
+
+## Implemented (Done)
+
+| Task | Status | Notes |
+|------|--------|------|
+| Single entry page with language selection | `[x]` | `index.html` = language selector; links to `ar.html` and `en.html` |
+| Three-step wizard (after language) | `[x]` | Step 1: choose message; Step 2: enter name; Step 3: preview & download; Back/Next |
+| Arabic card flow | `[x]` | `ar.html` + `index.js`, shared Ramadan design image, step indicator (١٢٣), three panels |
+| English card flow | `[x]` | `en.html` + `en.js`, same Ramadan design image, step indicator (1-2-3), three panels |
+| Three message options (per language) | `[x]` | Step 1 only; from `config.js` (MESSAGES.ar, MESSAGES.en) |
+| Data/config for message strings | `[x]` | `config.js`: single source of truth for AR and EN options |
+| Draw chosen message + name on canvas | `[x]` | Step 3 only; message 32pt, name 35pt, #2F388D |
+| Download includes message + name | `[x]` | PNG from step 3 preview; filename moa3aydah.png |
+| Satorp font integration | `[x]` | @font-face in style.css; used on canvas and UI |
+| RTL for Arabic, LTR for English | `[x]` | dir and labels per page; step indicator localized |
+| 6 Degrees footer | `[x]` | Link and branding on all pages |
+| Memory Bank creation | `[x]` | project_brief, product_context, active_context, system_patterns, tech_context, progress |
+
+---
+
+## To Do (Optional / Backlog)
+
+| Task | Status | Notes |
+|------|--------|------|
+| Replace placeholder message copy | `[>]` | Current messages in config.js are placeholders; replace with final copy if needed |
+| Back link from card page to language selector | `[ ]` | Optional: "Change language" link on ar.html / en.html |
+
+---
+
+## In Progress
+- None.
+
+---
+
+## Known Issues / Limitations
+- Message copy in `config.js` is placeholder (Ramadan-style); can be updated without code changes.
+- Direct URLs: `/` = language select, `/ar.html` = Arabic card, `/en.html` = English card. Old bookmark to index for Arabic flow now shows language selector (intended).
+
+---
+
+## Summary
+Intended user flow is implemented: language selection, then a **three-step process** — (1) choose message, (2) enter name, (3) preview and download. Step indicator and Back/Next navigation on both Arabic and English card pages. All steps work with shared config and consistent branding.
