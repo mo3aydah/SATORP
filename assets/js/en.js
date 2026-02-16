@@ -184,7 +184,7 @@ function drawCardWithText(messageText, nameText) {
       messageLines = wrapCanvasText(context, messageText, messageMaxWidth);
     }
     if (messageLines.length > 2) messageLines = messageLines.slice(0, 2);
-    var messageY = nameY - 40 - (messageLines.length - 1) * messageLineHeight;
+    var messageY = nameY - 78 - (messageLines.length - 1) * messageLineHeight;
     for (var i = 0; i < messageLines.length; i++) {
       context.fillText(messageLines[i], centerX, messageY + i * messageLineHeight);
     }
