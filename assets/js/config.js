@@ -4,13 +4,11 @@
  */
 var MESSAGES = {
   en: [
-    "May Allah shower you with forgiveness and endless blessings.",
     "Wishing you a Ramadan filled with mercy, peace, and blessings.",
-    "May your efforts be rewarded and your heart find tranquility this Ramadan."
+    "May your efforts be rewarded, and may your heart find serenity this Ramadan."
   ],
   ar: [
-    "نسأل الله أن يغدق عليكم المغفرة والبركات التي لا تنتهي.",
-    "نتمنى لكم شهر رمضان مليئًا بالرحمة والسلام والبركات.",
-    "نسأل الله أن يجزيكم على جهودكم، وأن يرزق قلوبكم الطمأنينة في هذا الشهر الكريم."
+    "نتمنى لكم شهر رمضان مليئاً بالرحمة والسلام والبركات.",
+    "نسأل اللّٰه أن يثيبكم على جهودكم، وأن يرزق قلوبكم الطمأنينة في هذا الشهر الكريم."
   ]
 };
