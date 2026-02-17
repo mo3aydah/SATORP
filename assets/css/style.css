@@ -274,8 +274,20 @@ body.page-lang-select {
     padding: 2rem 1.5rem 2rem;
 }
 .lang-select-content {
-    text-align: left;
+    text-align: center;
     width: 100%;
+}
+.lang-select-card-preview {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.lang-select-card-img {
+    width: 100%;
+    max-width: 280px;
+    max-height: min(320px, 45vh);
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 .lang-select-title {
     display: flex;
@@ -327,32 +339,21 @@ body.page-lang-select {
     text-decoration: none;
     transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease, transform 0.1s ease;
 }
-/* Primary: filled light gray (SIGN IN style) */
-.lang-btn-primary {
+/* Both CTAs: same color (filled light gray) */
+.lang-btn-primary,
+.lang-btn-secondary {
     background: #e5e5e5;
     color: #1a1a1a;
     border: none;
 }
-.lang-btn-primary:hover {
+.lang-btn-primary:hover,
+.lang-btn-secondary:hover {
     background: #ebebeb;
     transform: translateY(-1px);
 }
-.lang-btn-primary:focus-visible {
-    outline: 2px solid #1a1a1a;
-    outline-offset: 2px;
-}
-/* Secondary: dark outline, transparent (CREATE ACCOUNT style) */
-.lang-btn-secondary {
-    background: transparent;
-    color: #ffffff;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-}
-.lang-btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.7);
-}
+.lang-btn-primary:focus-visible,
 .lang-btn-secondary:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.9);
+    outline: 2px solid #1a1a1a;
     outline-offset: 2px;
 }
 .lang-btn-primary:active,
