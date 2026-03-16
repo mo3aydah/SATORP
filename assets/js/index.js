@@ -135,7 +135,7 @@ function sanitizeFileName(str) {
 function downloadCanvasAsImage(onComplete) {
   var nameEl = document.getElementById("name");
   var namePart = sanitizeFileName(nameEl ? nameEl.value : "");
-  var imageName = "6D-Satorp-Ramadan-Greeting" + (namePart ? "-" + namePart : "") + ".png";
+  var imageName = "6D-Satorp-Eid-Greeting" + (namePart ? "-" + namePart : "") + ".png";
   var downloadLink = document.createElement("a");
   downloadLink.setAttribute("download", imageName);
   canvas.toBlob(function (blob) {
