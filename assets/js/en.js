@@ -170,9 +170,9 @@ function drawCardWithText(messageText, nameText) {
   context.drawImage(imageObj, 0, 0, canvasWidth, canvasHeight);
 
   context.textAlign = "center";
-  context.fillStyle = "#2F388D";
+  context.fillStyle = "#006E57";
   var centerX = canvasWidth / 2;
-  var nameY = canvasHeight - 400;
+  var nameY = canvasHeight - 260;
   var messageMaxWidth = 620;
   var messageLineHeight = 38;
 
@@ -186,7 +186,7 @@ function drawCardWithText(messageText, nameText) {
     }
     var maxMessageLines = 6;
     if (messageLines.length > maxMessageLines) messageLines = messageLines.slice(0, maxMessageLines);
-    var messageY = nameY - 78 - (messageLines.length - 1) * messageLineHeight;
+    var messageY = nameY - 90 - (messageLines.length - 1) * messageLineHeight;
     for (var i = 0; i < messageLines.length; i++) {
       context.fillText(messageLines[i], centerX, messageY + i * messageLineHeight);
     }
