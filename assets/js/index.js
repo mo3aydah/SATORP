@@ -173,17 +173,12 @@ function drawCardWithText(messageText, nameText) {
   context.fillStyle = "#006E57";
   var centerX = canvasWidth / 2;
   var nameY = canvasHeight - 280;
-  var messageMaxWidth = 620;
+  var messageMaxWidth = 820;
   var messageLineHeight = 44;
 
   if (messageText) {
     context.font = "300 28pt Satorp";
     var messageLines = wrapCanvasText(context, messageText, messageMaxWidth);
-    if (messageLines.length > 2) {
-      context.font = "300 22pt Satorp";
-      messageLines = wrapCanvasText(context, messageText, messageMaxWidth);
-      messageLineHeight = 38;
-    }
     var maxMessageLines = 6;
     if (messageLines.length > maxMessageLines) messageLines = messageLines.slice(0, maxMessageLines);
     var messageY = nameY - 120 - (messageLines.length - 1) * messageLineHeight;
