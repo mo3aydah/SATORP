@@ -179,7 +179,7 @@ function drawCardWithText(messageText, nameText) {
   if (messageText) {
     context.font = "300 28pt Satorp";
     var messageLines = wrapCanvasText(context, messageText, messageMaxWidth);
-    var maxMessageLines = 6;
+    var maxMessageLines = 2;
     if (messageLines.length > maxMessageLines) messageLines = messageLines.slice(0, maxMessageLines);
     var messageY = nameY - 80 - (messageLines.length - 1) * messageLineHeight;
     for (var i = 0; i < messageLines.length; i++) {

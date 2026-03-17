@@ -4,8 +4,8 @@
  */
 var MESSAGES = {
   en: [
-    "Wishing you a happy Eid. May this blessed occasion return to you in good health, and may your days be filled with goodness and joy.",
-    "Wishing you a happy Eid filled with health and joy, and may it bring you many lasting and beautiful moments shared with your loved ones."
+    "Wishing you a joyful Eid. May this blessed occasion bring you good health and happiness.",
+    "Wishing you a joyful Eid filled with health and wonderful moments with your loved ones."
   ],
   ar: [
     "كل عام وأنتم بخير، أعاده الله عليكم بالصحة والعافية، وجعل أيامكم مليئة بالخير والأُنس.",
