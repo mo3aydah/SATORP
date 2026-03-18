@@ -50,8 +50,8 @@ Review covers: **bugs**, **errors**, **accessibility**, **UX**, and **enhancemen
 - Back/Next and step dots make progress obvious.
 - Blur mirror matches selected card on first page and on all steps (ar/en).
 - White text on card 2 for contrast; green on card 1.
-- Single language-switch CTA in navbar; no double buttons.
-- Content (title, description, deck, hint, CTA) order is logical.
+- Language selection: two buttons (العربية / English) under the card; no navbar on any page.
+- Content (title, description, deck, bilingual hint, two lang buttons) order is logical.
 
 ### Improvements
 - **Loading state:** One loading message for the whole card; consider a light skeleton or “Preparing your card…” so the wait feels intentional.
@@ -115,9 +115,28 @@ Review covers: **bugs**, **errors**, **accessibility**, **UX**, and **enhancemen
 ## Current Status Summary
 
 - **No known critical bugs.** Image load error, canvas guard, footer styling, and DOM/touch robustness fixes are in place.
-- **Flow:** Language + card select → message → name → preview & download. Card and language persist via URL params.
+- **Flow:** **index.html** — Title + description (both languages) → card deck → "اسحب واختر · Swipe and choose" (one line) → two buttons (العربية, English). Click a button → **ar.html** or **en.html** with `?card=1` or `?card=2`. Then 3 steps: message → name → preview & download. No navbar on language-select or card pages.
 - **Assets:** All referenced images and fonts exist under `assets/`.
+- **Cleanup:** Inline scripts on ar.html and en.html no longer reference removed nav elements; they only set the blur mirror background from `?card=`.
 
 ---
 
-*Last full review: 2026-03-18*
+## Pre-push checklist (verified)
+
+| Check | Status |
+|-------|--------|
+| All HTML pages load (index, ar, en) | OK |
+| Card selection passes `?card=` to ar/en | OK |
+| Two language buttons under card, no navbar on index | OK |
+| No navbar on ar.html / en.html | OK |
+| Blur mirror and canvas use selected card | OK |
+| Image load error handling (index.js, en.js) | OK |
+| Canvas draw guard (image complete) | OK |
+| Step/download listeners with null checks | OK |
+| Touch swipe with touch-length guard | OK |
+| Footer consistent (footer-lang-page) on all pages | OK |
+| No dead script (nav link updates removed from ar/en) | OK |
+
+---
+
+*Last full review (pre-push): 2026-03-18*

@@ -1,10 +1,8 @@
 (function () {
   var deck = document.getElementById("cardDeck");
-  var btnContinue = document.getElementById("btnContinue");
-  var navLangSwitch = document.getElementById("navLangSwitch");
-  if (!deck || !btnContinue) return;
-
-  var currentLang = "ar";
+  var langAr = document.getElementById("langAr");
+  var langEn = document.getElementById("langEn");
+  if (!deck) return;
 
   var CARD_IMAGES = {
     "1": "assets/images/Satorp - Ramadan Design (Employees greeting).png",
@@ -16,35 +14,11 @@
     return selected ? selected.getAttribute("data-card") : "1";
   }
 
-  function updateContinueButton() {
+  function updateLangLinks() {
     var card = getSelectedCard();
     var q = "?card=" + card;
-    if (currentLang === "ar") {
-      btnContinue.href = "ar.html" + q;
-      btnContinue.textContent = "متابعة";
-      btnContinue.setAttribute("dir", "rtl");
-    } else {
-      btnContinue.href = "en.html" + q;
-      btnContinue.textContent = "Continue";
-      btnContinue.removeAttribute("dir");
-    }
-  }
-
-  function updateSwitchButton() {
-    if (!navLangSwitch) return;
-    var card = getSelectedCard();
-    var q = "?card=" + card;
-    if (currentLang === "ar") {
-      navLangSwitch.textContent = "English";
-      navLangSwitch.href = "#";
-      navLangSwitch.removeAttribute("dir");
-      navLangSwitch.setAttribute("aria-label", "Switch to English");
-    } else {
-      navLangSwitch.textContent = "عربي";
-      navLangSwitch.href = "#";
-      navLangSwitch.setAttribute("dir", "rtl");
-      navLangSwitch.setAttribute("aria-label", "التبديل إلى العربية");
-    }
+    if (langAr) langAr.href = "ar.html" + q;
+    if (langEn) langEn.href = "en.html" + q;
   }
 
   function selectCardByIndex(index) {
@@ -57,7 +31,7 @@
     });
     target.classList.add("selected");
     target.setAttribute("aria-selected", "true");
-    updateContinueButton();
+    updateLangLinks();
     updateBgMirror();
   }
 
@@ -103,10 +77,6 @@
     else if (delta < -minSwipe) selectPrevCard();
   }, { passive: true });
 
-  function setBodyLang() {
-    document.body.setAttribute("data-lang", currentLang);
-  }
-
   function updateBgMirror() {
     var mirror = document.getElementById("langSelectBgMirror");
     if (!mirror) return;
@@ -115,18 +85,6 @@
     mirror.style.backgroundImage = "url(" + url + ")";
   }
 
-  if (navLangSwitch) {
-    navLangSwitch.addEventListener("click", function (e) {
-      e.preventDefault();
-      currentLang = currentLang === "ar" ? "en" : "ar";
-      setBodyLang();
-      updateSwitchButton();
-      updateContinueButton();
-    });
-  }
-
-  setBodyLang();
-  updateSwitchButton();
-  updateContinueButton();
+  updateLangLinks();
   updateBgMirror();
 })();

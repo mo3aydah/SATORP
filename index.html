@@ -9,12 +9,7 @@
 
     <title>Greeting Card | بطاقة معايدة</title>
 </head>
-<body class="page-lang-select" data-lang="ar">
-    <nav class="app-navbar" aria-label="Language">
-        <div class="navbar-inner">
-            <a href="#" id="navLangSwitch" class="nav-lang nav-lang-cta" aria-label="Switch to English">English</a>
-        </div>
-    </nav>
+<body class="page-lang-select">
     <div class="lang-select-bg">
         <div class="lang-select-bg-mirror" id="langSelectBgMirror" aria-hidden="true"></div>
     </div>
@@ -34,10 +29,14 @@
                     <img src="assets/images/new-design.jpg.jpeg" alt="Eid card design 2" />
                 </div>
             </div>
-            <p class="deck-hint lang-select-desc-ar lang-ar" dir="rtl">اسحب واختر</p>
-            <p class="deck-hint lang-select-desc lang-en">Swipe and choose</p>
+            <p class="deck-hint deck-hint-bilingual">
+                <span class="lang-ar" dir="rtl">اسحب واختر</span>
+                <span class="deck-hint-sep" aria-hidden="true"> · </span>
+                <span class="lang-en">Swipe and choose</span>
+            </p>
             <div class="lang-select-buttons">
-                <a href="ar.html" id="btnContinue" class="btn lang-btn-primary" dir="rtl" aria-label="Continue">متابعة</a>
+                <a href="ar.html" id="langAr" class="btn lang-btn-primary" dir="rtl" aria-label="العربية">العربية</a>
+                <a href="en.html" id="langEn" class="btn lang-btn-primary" aria-label="English">English</a>
             </div>
         </section>
     </div>

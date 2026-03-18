@@ -14,11 +14,6 @@
     <div class="lang-select-bg" aria-hidden="true">
         <div class="lang-select-bg-mirror" id="langSelectBgMirror"></div>
     </div>
-    <nav class="app-navbar" aria-label="Language">
-        <div class="navbar-inner">
-            <a href="ar.html" id="navLangAr" class="nav-lang nav-lang-cta" dir="rtl" aria-label="Switch to Arabic">عربي</a>
-        </div>
-    </nav>
     <div class="container mt-3">
         <!-- Step indicator -->
         <div class="step-indicator mb-2" dir="ltr" role="navigation" aria-label="Card creation steps">
@@ -99,8 +94,6 @@
       (function () {
         var m = /[?&]card=(\d+)/.exec(location.search);
         var card = m ? m[1] : "1";
-        var ar = document.getElementById("navLangAr");
-        if (ar) ar.href = "ar.html?card=" + card;
         var urls = { "1": "assets/images/Satorp - Ramadan Design (Employees greeting).png", "2": "assets/images/new-design.jpg.jpeg" };
         var mirror = document.getElementById("langSelectBgMirror");
         if (mirror) mirror.style.backgroundImage = "url(" + (urls[card] || urls["1"]) + ")";
