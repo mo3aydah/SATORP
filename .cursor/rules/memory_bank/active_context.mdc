@@ -28,4 +28,6 @@ A step indicator (1–2–3) is shown at the top; only one step panel is visible
 - Replace placeholder messages in `config.js`. Add "Change language" link on card pages to return to `index.html`.
 
 ## Recent Significant Context
-- Flow refactored into an explicit three-step process after language: step 1 = choose message, step 2 = enter name, step 3 = preview and download. Step indicator and Back/Next navigation implemented on both ar.html and en.html.
+- **UX/a11y:** Focus moves to Download button when entering step 3 (index.js, en.js). Name field gets aria-invalid when validation fails and aria-describedby="nameError". Deck hint is "Tap to choose" / "انقر للاختيار" (index.html).
+- **Full project review (REVIEW.md):** Bugs, accessibility, UI/UX, and code-quality notes documented. Fixes applied: image load error shows user-facing message; drawCardWithText guards on image load; footer above blur; focus on Download at step 3; aria-invalid + aria-describedby for name; "Tap to choose" copy.
+- Flow: three-step process after language (message → name → preview & download); step indicator and Back/Next on both ar.html and en.html.

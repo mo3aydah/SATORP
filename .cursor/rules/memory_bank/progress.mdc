@@ -30,6 +30,14 @@ alwaysApply: true
 | RTL for Arabic, LTR for English | `[x]` | dir and labels per page; step indicator localized |
 | 6 Degrees footer | `[x]` | Link and branding on all pages |
 | Memory Bank creation | `[x]` | project_brief, product_context, active_context, system_patterns, tech_context, progress |
+| Full project review (REVIEW.md) | `[x]` | Bugs, UX, a11y, and enhancements documented |
+| Image load error handling | `[x]` | User sees message instead of being stuck; index.js + en.js |
+| Canvas draw guard | `[x]` | drawCardWithText returns early if image not loaded |
+| Footer above blur on card pages | `[x]` | body:not(.page-lang-select) footer { position: relative; z-index: 1 } |
+| Focus on Download when entering step 3 | `[x]` | index.js + en.js: focus downloadCard after step 3 transition |
+| aria-invalid on name field when validation fails | `[x]` | set/clear in step2Next + updateNameStepUI; aria-describedby on input |
+| Deck hint "Tap to choose" / "انقر للاختيار" | `[x]` | index.html; later reverted to "Swipe and choose" + touch swipe |
+| Full review (robustness) | `[x]` | Null checks for step/download buttons (index.js, en.js); touch guard in deck-select.js; REVIEW.md updated |
 
 ---
 
@@ -48,8 +56,10 @@ alwaysApply: true
 ---
 
 ## Known Issues / Limitations
-- Message copy in `config.js` is placeholder (Ramadan-style); can be updated without code changes.
-- Direct URLs: `/` = language select, `/ar.html` = Arabic card, `/en.html` = English card. Old bookmark to index for Arabic flow now shows language selector (intended).
+- Message copy in `config.js` is placeholder; can be updated without code changes.
+- Config has **2** message options per language; docs mention 3 — align config or docs as needed.
+- Direct URLs: `/` = language select, `/ar.html` = Arabic card, `/en.html` = English card. Visiting ar/en without `?card=` defaults to card 1.
+- See **REVIEW.md** for full list of optional enhancements (focus management, aria-invalid, centralize card URLs, etc.).
 
 ---
 

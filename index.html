@@ -9,27 +9,40 @@
 
     <title>Greeting Card | بطاقة معايدة</title>
 </head>
-<body class="page-lang-select">
-    <div class="lang-select-bg"></div>
+<body class="page-lang-select" data-lang="ar">
+    <nav class="app-navbar" aria-label="Language">
+        <div class="navbar-inner">
+            <a href="#" id="navLangSwitch" class="nav-lang nav-lang-cta" aria-label="Switch to English">English</a>
+        </div>
+    </nav>
+    <div class="lang-select-bg">
+        <div class="lang-select-bg-mirror" id="langSelectBgMirror" aria-hidden="true"></div>
+    </div>
     <div class="container page-lang-select-inner">
         <section class="lang-select-content" aria-label="Language selection">
-            <div class="lang-select-card-preview">
-                <img src="assets/images/Satorp - Ramadan Design (Employees greeting).png" alt="Eid greeting card preview" class="lang-select-card-img" />
-            </div>
             <h1 class="lang-select-title">
-                <span class="lang-select-title-ar" dir="rtl">تهنئة العيد لمن يعز عليك</span>
-                <span class="lang-select-title-en">An Eid Greeting for Someone Special</span>
+                <span class="lang-select-title-ar lang-ar" dir="rtl">تهنئة العيد لمن يعز عليك</span>
+                <span class="lang-select-title-en lang-en">An Eid Greeting for Someone Special</span>
             </h1>
-            <p class="lang-select-desc lang-select-desc-ar" dir="rtl">أنشئ بطاقة تهنئة بالعيد مميزة وشاركها مع من تحب</p>
-            <p class="lang-select-desc">Create a special Eid greeting card and share it with your loved ones</p>
-            <p class="lang-select-prompt">Please select a language · <span dir="rtl">يرجى اختيار اللغة</span></p>
+            <p class="lang-select-desc lang-select-desc-ar lang-ar" dir="rtl">أنشئ بطاقة تهنئة بالعيد مميزة وشاركها مع من تحب</p>
+            <p class="lang-select-desc lang-en">Create a special Eid greeting card and share it with your loved ones</p>
+            <div class="card-deck" id="cardDeck" role="listbox" aria-label="Choose card design">
+                <div class="card-deck-item selected" data-card="1" role="option" aria-selected="true" tabindex="0">
+                    <img src="assets/images/Satorp - Ramadan Design (Employees greeting).png" alt="Eid card design 1" />
+                </div>
+                <div class="card-deck-item" data-card="2" role="option" aria-selected="false" tabindex="0">
+                    <img src="assets/images/new-design.jpg.jpeg" alt="Eid card design 2" />
+                </div>
+            </div>
+            <p class="deck-hint lang-select-desc-ar lang-ar" dir="rtl">اسحب واختر</p>
+            <p class="deck-hint lang-select-desc lang-en">Swipe and choose</p>
             <div class="lang-select-buttons">
-                <a href="ar.html" class="btn lang-btn-primary" dir="rtl" aria-label="Choose Arabic">العربية</a>
-                <a href="en.html" class="btn lang-btn-secondary" aria-label="Choose English">English</a>
+                <a href="ar.html" id="btnContinue" class="btn lang-btn-primary" dir="rtl" aria-label="Continue">متابعة</a>
             </div>
         </section>
     </div>
 
+    <script src="assets/js/deck-select.js"></script>
     <footer class="text-center mt-5 py-2 fixed-bottom footer-lang-page">
         <p class="mb-0">Powered by
             <a href="https://6degrees.com.sa/en" target="_blank" rel="noopener" class="footer-link footer-logo-link">

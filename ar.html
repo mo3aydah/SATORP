@@ -11,6 +11,14 @@
     <title>بطاقة معايدة</title>
 </head>
 <body>
+    <div class="lang-select-bg" aria-hidden="true">
+        <div class="lang-select-bg-mirror" id="langSelectBgMirror"></div>
+    </div>
+    <nav class="app-navbar" aria-label="اللغة">
+        <div class="navbar-inner">
+            <a href="en.html" id="navLangEn" class="nav-lang nav-lang-cta" aria-label="Switch to English">English</a>
+        </div>
+    </nav>
     <div class="container mt-3">
         <!-- Step indicator -->
         <div class="step-indicator mb-2" dir="rtl" role="navigation" aria-label="خطوات إنشاء المعايدة">
@@ -53,7 +61,7 @@
             <h2 class="text-white mb-3">أدخل اسمك</h2>
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8">
-                    <input type="text" class="form-control form-control-lg" name="name" id="name" required placeholder="أكتب اسمك هنا" dir="rtl" />
+                    <input type="text" class="form-control form-control-lg" name="name" id="name" required placeholder="أكتب اسمك هنا" dir="rtl" aria-describedby="nameError" />
                     <p class="name-helper mt-2 mb-0">سيظهر هذا الاسم على البطاقة.</p>
                     <p class="name-error mt-1 mb-0" id="nameError" role="alert" hidden>أدخل اسمك</p>
                 </div>
@@ -77,7 +85,7 @@
         </div>
     </div>
 
-    <footer class="text-center mt-5 py-3" dir="ltr">
+    <footer class="text-center mt-5 py-2 footer-lang-page" dir="ltr">
         <p class="mb-0">Powered by
             <a href="https://6degrees.com.sa/en" target="_blank" rel="noopener" class="footer-link footer-logo-link">
                 <img src="assets/images/6degrees-logo.png" alt="6 Degrees" class="footer-logo" />
@@ -87,5 +95,16 @@
 
     <script src="assets/js/config.js"></script>
     <script src="assets/js/index.js"></script>
+    <script>
+      (function () {
+        var m = /[?&]card=(\d+)/.exec(location.search);
+        var card = m ? m[1] : "1";
+        var en = document.getElementById("navLangEn");
+        if (en) en.href = "en.html?card=" + card;
+        var urls = { "1": "assets/images/Satorp - Ramadan Design (Employees greeting).png", "2": "assets/images/new-design.jpg.jpeg" };
+        var mirror = document.getElementById("langSelectBgMirror");
+        if (mirror) mirror.style.backgroundImage = "url(" + (urls[card] || urls["1"]) + ")";
+      })();
+    </script>
 </body>
 </html>

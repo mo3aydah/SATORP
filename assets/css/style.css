@@ -237,6 +237,72 @@ body input.form-control:focus {
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
 }
 
+/* ----- App navbar (language switcher) ----- */
+.app-navbar {
+    position: relative;
+    z-index: 100;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.6rem 1rem;
+    margin-bottom: 1rem;
+}
+.navbar-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+}
+.nav-lang {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.35rem 0.6rem;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+}
+.nav-lang:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+.nav-lang.active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+}
+/* Single language-switch button: white CTA, pill shape (shows the other language) */
+.nav-lang-cta {
+    background: #ffffff;
+    color: #1a1a1a;
+    padding: 0.75rem 1.75rem;
+    border-radius: 9999px;
+    font-weight: 700;
+}
+.nav-lang-cta:hover {
+    background: #f0f0f0;
+    color: #1a1a1a;
+    transform: translateY(-1px);
+}
+.nav-lang-sep {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.9rem;
+    user-select: none;
+}
+body:not(.page-lang-select) .container.mt-3 {
+    margin-top: 0;
+    padding-top: 0.75rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* ----- Language selection page: show only active language ----- */
+body.page-lang-select[data-lang="ar"] .lang-en {
+    display: none !important;
+}
+body.page-lang-select[data-lang="en"] .lang-ar {
+    display: none !important;
+}
+
 /* ----- Language selection page (dark navy blue reference) ----- */
 body.page-lang-select {
     background: var(--navy);
@@ -248,18 +314,35 @@ body.page-lang-select {
     position: fixed;
     inset: 0;
     background: var(--navy);
-    background-image: linear-gradient(145deg, var(--navy-dark) 0%, var(--navy) 40%, var(--navy-light) 100%);
     pointer-events: none;
     z-index: 0;
+    overflow: hidden;
 }
-.lang-select-bg::before {
+/* Blurred card mirror: image set by JS to match selected card (card 1 default) */
+.lang-select-bg-mirror {
+    position: absolute;
+    inset: -20%;
+    background-image: url("../images/Satorp - Ramadan Design (Employees greeting).png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(50px);
+    transform: scale(1.15);
+    opacity: 0.9;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+/* Dark overlay so text stays readable */
+.lang-select-bg::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-    background-size: 28px 28px;
+    background: linear-gradient(
+        145deg,
+        rgba(2, 5, 16, 0.82) 0%,
+        rgba(2, 8, 32, 0.78) 45%,
+        rgba(6, 12, 32, 0.85) 100%
+    );
     pointer-events: none;
 }
 .page-lang-select-inner {
@@ -271,11 +354,12 @@ body.page-lang-select {
     max-width: 480px;
     width: 100%;
     margin: 0 auto;
-    padding: 2rem 1.5rem 2rem;
+    padding: 3.5rem 1.5rem 2rem;
 }
 .lang-select-content {
     text-align: center;
     width: 100%;
+    padding-top: 0.75rem;
 }
 .lang-select-card-preview {
     text-align: center;
@@ -289,6 +373,74 @@ body.page-lang-select {
     border-radius: 8px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
+
+/* Card deck: fanned stack (swipe and choose) */
+.deck-hint {
+    margin: 0.4rem 0 1.75rem !important;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+.deck-hint.lang-select-desc-ar {
+    margin-bottom: 1.75rem !important;
+}
+.card-deck {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.25rem;
+    min-height: 280px;
+    perspective: 800px;
+    left: 0;
+    right: 0;
+}
+.card-deck-item {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 85%;
+    max-width: 260px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.35s ease, z-index 0.35s ease, box-shadow 0.35s ease;
+    z-index: 1;
+}
+.card-deck-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    vertical-align: middle;
+    border-radius: 16px;
+}
+.card-deck-item[data-card="1"] {
+    transform: translateX(-50%) rotate(-12deg);
+}
+.card-deck-item[data-card="2"] {
+    transform: translateX(-50%) rotate(12deg);
+}
+.card-deck-item.selected {
+    z-index: 10;
+    transform: translateX(-50%) rotate(0) scale(1.02);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+.card-deck-item:not(.selected)[data-card="1"] {
+    z-index: 2;
+}
+.card-deck-item:not(.selected)[data-card="2"] {
+    z-index: 2;
+}
+.card-deck-item:focus {
+    outline: none;
+}
+.card-deck-item:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 3px;
+}
+
 .lang-select-title {
     display: flex;
     flex-direction: column;
@@ -298,7 +450,7 @@ body.page-lang-select {
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.35;
-    margin: 0 0 1.5rem;
+    margin: 0 0 0.6rem;
 }
 .lang-select-title-en,
 .lang-select-title-ar {
@@ -308,13 +460,13 @@ body.page-lang-select {
     font-weight: inherit;
 }
 .lang-select-desc {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
     line-height: 1.55;
-    margin: 0 0 0.5rem;
+    margin: 0 0 2.75rem;
 }
 .lang-select-desc-ar {
-    margin-bottom: 1.25rem;
+    margin-bottom: 2.75rem;
 }
 .lang-select-prompt {
     color: rgba(255, 255, 255, 0.55);
@@ -370,16 +522,24 @@ body.page-lang-select {
 .footer-lang-page a {
     font-weight: 500;
 }
-body.page-lang-select footer.footer-lang-page {
+/* Same footer look on language-select and card pages */
+footer.footer-lang-page {
     background: transparent;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     color: rgba(255, 255, 255, 0.5);
+    opacity: 1;
 }
-body.page-lang-select footer.footer-lang-page a {
+footer.footer-lang-page a {
     color: rgba(255, 255, 255, 0.7);
 }
 
 /* ----- Footer (6D-style: minimal, link to 6degrees.com.sa) ----- */
+/* Footer on card pages (ar/en): above blur background */
+body:not(.page-lang-select) footer {
+    position: relative;
+    z-index: 1;
+}
+
 footer {
     color: var(--text-muted);
     font-size: 0.875rem;
@@ -489,12 +649,12 @@ footer p.mb-0 {
     transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
-/* Current step: strong highlight */
+/* Current step: white highlight */
 .step-dot.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-    box-shadow: 0 0 0 2px rgba(45, 55, 141, 0.4);
+    background: #ffffff;
+    border-color: #ffffff;
+    color: #1a1a1a;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
 /* Completed steps: muted */

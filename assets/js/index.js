@@ -13,9 +13,23 @@ imageObj.onload = function () {
   updatePreview();
 };
 imageObj.onerror = function () {
-  console.error("Failed to load image.");
+  var loading = document.getElementById("cardPreviewLoading");
+  if (loading) {
+    loading.textContent = "تعذر تحميل صورة البطاقة. تحقق من الاتصال وحاول مرة أخرى.";
+    loading.hidden = false;
+  }
+  console.error("Failed to load card image.");
 };
-imageObj.src = "assets/images/Satorp - Ramadan Design (Employees greeting).png";
+var selectedCardId = "1";
+(function () {
+  var m = /[?&]card=(\d+)/.exec(window.location.search);
+  if (m) selectedCardId = m[1];
+  var urls = {
+    "1": "assets/images/Satorp - Ramadan Design (Employees greeting).png",
+    "2": "assets/images/new-design.jpg.jpeg"
+  };
+  imageObj.src = urls[selectedCardId] || urls["1"];
+})();
 
 var chosenMessage = null;
 var currentStep = 1;
@@ -55,6 +69,11 @@ function showStep(step) {
         var nameEl = document.getElementById("name");
         if (nameEl) nameEl.focus();
       }, 100);
+    } else if (step === 3) {
+      setTimeout(function () {
+        var downloadBtn = document.getElementById("downloadCard");
+        if (downloadBtn) downloadBtn.focus();
+      }, 100);
     }
     return;
   }
@@ -81,6 +100,11 @@ function showStep(step) {
         var nameEl = document.getElementById("name");
         if (nameEl) nameEl.focus();
       }, 100);
+    } else if (step === 3) {
+      setTimeout(function () {
+        var downloadBtn = document.getElementById("downloadCard");
+        if (downloadBtn) downloadBtn.focus();
+      }, 100);
     }
   }, stepTransitionMs);
 }
@@ -102,7 +126,10 @@ function updateNameStepUI() {
   if (!nameEl) return;
   var val = nameEl.value.trim();
   if (nextBtn) nextBtn.disabled = val.length === 0;
-  if (errorEl && val.length > 0) errorEl.hidden = true;
+  if (errorEl && val.length > 0) {
+    errorEl.hidden = true;
+    nameEl.setAttribute("aria-invalid", "false");
+  }
 }
 
 function buildMessageOptions() {
@@ -166,11 +193,12 @@ function wrapCanvasText(ctx, text, maxWidth) {
 }
 
 function drawCardWithText(messageText, nameText) {
+  if (!imageObj.complete || !imageObj.naturalWidth) return;
   context.clearRect(0, 0, canvasWidth, canvasHeight);
   context.drawImage(imageObj, 0, 0, canvasWidth, canvasHeight);
 
   context.textAlign = "center";
-  context.fillStyle = "#006E57";
+  context.fillStyle = selectedCardId === "2" ? "#ffffff" : "#006E57";
   var centerX = canvasWidth / 2;
   var nameY = canvasHeight - 280;
   var messageMaxWidth = 820;
@@ -215,7 +243,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  document.getElementById("step1Next").addEventListener("click", function () {
+  var step1Next = document.getElementById("step1Next");
+  if (step1Next) step1Next.addEventListener("click", function () {
     if (!chosenMessage) {
       alert("اختر رسالة أولاً");
       return;
@@ -223,28 +252,36 @@ document.addEventListener("DOMContentLoaded", function () {
     showStep(2);
   });
 
-  document.getElementById("step2Back").addEventListener("click", function () {
+  var step2Back = document.getElementById("step2Back");
+  if (step2Back) step2Back.addEventListener("click", function () {
     showStep(1);
   });
 
-  document.getElementById("step2Next").addEventListener("click", function () {
-    var nameText = document.getElementById("name").value.trim();
+  var step2Next = document.getElementById("step2Next");
+  if (step2Next) step2Next.addEventListener("click", function () {
+    var nameEl = document.getElementById("name");
+    var nameText = nameEl ? nameEl.value.trim() : "";
     var errorEl = document.getElementById("nameError");
     if (!nameText) {
+      if (nameEl) nameEl.setAttribute("aria-invalid", "true");
       if (errorEl) errorEl.hidden = false;
-      document.getElementById("name").focus();
+      if (nameEl) nameEl.focus();
       return;
     }
+    if (nameEl) nameEl.setAttribute("aria-invalid", "false");
     if (errorEl) errorEl.hidden = true;
     showStep(3);
   });
 
-  document.getElementById("step3Back").addEventListener("click", function () {
+  var step3Back = document.getElementById("step3Back");
+  if (step3Back) step3Back.addEventListener("click", function () {
     showStep(2);
   });
 
-  document.getElementById("downloadCard").addEventListener("click", function () {
+  var downloadCard = document.getElementById("downloadCard");
+  if (downloadCard) downloadCard.addEventListener("click", function () {
     var btn = document.getElementById("downloadCard");
+    if (!btn) return;
     if (btn.disabled) return;
     var defaultHtml = btn.innerHTML;
     btn.disabled = true;
