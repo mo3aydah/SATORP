@@ -233,14 +233,14 @@ function drawCardWithText(messageText, nameText) {
     }
 
     if (messageLines.length > maxMessageLines) messageLines = messageLines.slice(0, maxMessageLines);
-    var messageYOffset = isRTL ? 60 : 40;
+    var messageYOffset = isRTL ? 90 : 70;
     var messageY = nameY + messageYOffset;
     for (var i = 0; i < messageLines.length; i++) {
       context.fillText(messageLines[i], centerX, messageY + i * messageLineHeight);
     }
   }
 
-  context.font = "300 30pt Satorp";
+  context.font = "500 24pt Satorp";
   if (nameText) {
     var nameYPos = messageText ? messageY + messageLines.length * messageLineHeight + 10 : nameY + 40;
     context.fillText(nameText, centerX, nameYPos);
