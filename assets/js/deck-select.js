@@ -97,30 +97,6 @@
     mirror.style.backgroundImage = "url(" + url + ")";
   }
 
-  var autoplayInterval = null;
-  var AUTOPLAY_DELAY = 2500;
-
-  function startAutoplay() {
-    stopAutoplay();
-    autoplayInterval = setInterval(selectNextCard, AUTOPLAY_DELAY);
-  }
-
-  function stopAutoplay() {
-    if (autoplayInterval) {
-      clearInterval(autoplayInterval);
-      autoplayInterval = null;
-    }
-  }
-
-  function restartAutoplay() {
-    stopAutoplay();
-    startAutoplay();
-  }
-
-  deck.addEventListener("click", function () { restartAutoplay(); });
-  deck.addEventListener("touchend", function () { restartAutoplay(); });
-
   updateLangLinks();
   updateBgMirror();
-  startAutoplay();
 })();
