@@ -15,6 +15,7 @@
         <div class="lang-select-bg-mirror" id="langSelectBgMirror"></div>
     </div>
     <div class="container mt-3">
+        <div class="link-lang-wrap"><a href="index.html" class="link-change-lang" aria-label="Change card or language">&larr; Change card</a></div>
         <!-- Step indicator -->
         <div class="step-indicator mb-2" dir="ltr" role="navigation" aria-label="Card creation steps">
             <div class="step-item" aria-label="Step 1 of 3: Message">
@@ -89,14 +90,11 @@
     </footer>
 
     <script src="assets/js/config.js"></script>
-    <script src="assets/js/en.js"></script>
+    <script src="assets/js/app.js"></script>
     <script>
       (function () {
-        var m = /[?&]card=(\d+)/.exec(location.search);
-        var card = m ? m[1] : "1";
-        var urls = { "1": "assets/images/Satorp - Ramadan Design (Employees greeting).png", "2": "assets/images/new-design.jpg.jpeg" };
         var mirror = document.getElementById("langSelectBgMirror");
-        if (mirror) mirror.style.backgroundImage = "url(" + (urls[card] || urls["1"]) + ")";
+        if (mirror) mirror.style.backgroundImage = "url(" + getCardImageUrl(getSelectedCardId()) + ")";
       })();
     </script>
 </body>

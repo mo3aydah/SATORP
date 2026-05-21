@@ -64,9 +64,9 @@ Review covers: **bugs**, **errors**, **accessibility**, **UX**, and **enhancemen
 
 ## Code Quality
 
-### Duplication
-- Card image URLs and `?card=` parsing are repeated (index.html deck, index.js, en.js, ar.html/en.html inline scripts). Consider one shared config (e.g. `config.js`) for card IDs and image URLs.
-- `index.js` and `en.js` are largely duplicated (canvas, steps, messaging); only language and a few layout numbers differ. A single script parameterized by language would reduce drift and bugs.
+### Duplication (resolved)
+- ~~Card image URLs and `?card=` parsing were repeated across multiple files.~~ Now centralized in `config.js` via `CARD_IMAGES`, `getSelectedCardId()`, and `getCardImageUrl()`.
+- ~~`index.js` and `en.js` were largely duplicated.~~ Merged into a single `app.js` that reads `<html lang="...">` to select language-specific messages and strings.
 
 ### Robustness
 - **Fixed:** Step and download button listeners in `index.js` and `en.js` now guard with null checks before `addEventListener`, so missing elements no longer cause throws.
@@ -102,8 +102,8 @@ Review covers: **bugs**, **errors**, **accessibility**, **UX**, and **enhancemen
 | Priority | Item |
 |----------|------|
 | Medium   | Add a third message per language or update docs to “two message options”. |
-| Low      | Centralize card image URLs and card ID logic in `config.js`. |
-| Low      | Refactor index.js/en.js into one parameterized script. |
+| Done     | Centralize card image URLs and card ID logic in `config.js`. |
+| Done     | Refactor index.js/en.js into one parameterized script (`app.js`). |
 | Done     | Guard `drawCardWithText` with image load check. |
 | Done     | Move focus to Download button when entering step 3. |
 | Done     | Set `aria-invalid` and `aria-describedby` on name input. |

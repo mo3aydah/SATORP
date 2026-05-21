@@ -4,9 +4,11 @@
   var langEn = document.getElementById("langEn");
   if (!deck) return;
 
-  var CARD_IMAGES = {
-    "1": "assets/images/Satorp - Ramadan Design (Employees greeting).png",
-    "2": "assets/images/new-design.jpg.jpeg"
+  var DECK_IMAGES = (typeof CARD_IMAGES !== "undefined") ? CARD_IMAGES : {
+    "1": "assets/images/Artboard 1.png",
+    "2": "assets/images/Artboard 2.png",
+    "3": "assets/images/Artboard 3.png",
+    "4": "assets/images/Artboard 4.png"
   };
 
   function getSelectedCard() {
@@ -25,12 +27,15 @@
     var items = deck.querySelectorAll(".card-deck-item");
     var target = items[index];
     if (!target) return;
-    items.forEach(function (el) {
+    items.forEach(function (el, i) {
       el.classList.remove("selected");
       el.setAttribute("aria-selected", "false");
+      var dist = Math.abs(i - index);
+      el.style.zIndex = dist === 0 ? 10 : (5 - dist);
     });
     target.classList.add("selected");
     target.setAttribute("aria-selected", "true");
+    target.style.zIndex = 10;
     updateLangLinks();
     updateBgMirror();
   }
@@ -49,14 +54,21 @@
     selectCardByIndex((idx - 1 + items.length) % items.length);
   }
 
+  deck.addEventListener("click", function (e) {
+    var rect = deck.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var pct = x / rect.width;
+    var items = deck.querySelectorAll(".card-deck-item");
+    var count = items.length;
+    var idx = Math.min(Math.floor(pct * count), count - 1);
+    selectCardByIndex(idx);
+  });
+
   deck.querySelectorAll(".card-deck-item").forEach(function (item) {
-    item.addEventListener("click", function () {
-      selectCardByIndex(Array.prototype.indexOf.call(deck.querySelectorAll(".card-deck-item"), item));
-    });
     item.addEventListener("keydown", function (e) {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        item.click();
+        selectCardByIndex(Array.prototype.indexOf.call(deck.querySelectorAll(".card-deck-item"), item));
       }
     });
   });
@@ -81,10 +93,34 @@
     var mirror = document.getElementById("langSelectBgMirror");
     if (!mirror) return;
     var card = getSelectedCard();
-    var url = CARD_IMAGES[card] || CARD_IMAGES["1"];
+    var url = DECK_IMAGES[card] || DECK_IMAGES["1"];
     mirror.style.backgroundImage = "url(" + url + ")";
   }
 
+  var autoplayInterval = null;
+  var AUTOPLAY_DELAY = 2500;
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayInterval = setInterval(selectNextCard, AUTOPLAY_DELAY);
+  }
+
+  function stopAutoplay() {
+    if (autoplayInterval) {
+      clearInterval(autoplayInterval);
+      autoplayInterval = null;
+    }
+  }
+
+  function restartAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  deck.addEventListener("click", function () { restartAutoplay(); });
+  deck.addEventListener("touchend", function () { restartAutoplay(); });
+
   updateLangLinks();
   updateBgMirror();
+  startAutoplay();
 })();
