@@ -6,6 +6,23 @@ var canvasHeight = 1080;
 canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 
+var lang = document.documentElement.lang === "ar" ? "ar" : "en";
+var isRTL = lang === "ar";
+
+var STRINGS = {
+  en: {
+    loadError: "Could not load card image. Check your connection and try again.",
+    chooseFirst: "Please choose a message first.",
+    generating: "<span class=\"download-spinner\" aria-hidden=\"true\"></span> Generating your card…"
+  },
+  ar: {
+    loadError: "تعذر تحميل صورة البطاقة. تحقق من الاتصال وحاول مرة أخرى.",
+    chooseFirst: "اختر رسالة أولاً",
+    generating: "<span class=\"download-spinner\" aria-hidden=\"true\"></span> جاري إنشاء بطاقتك…"
+  }
+};
+var S = STRINGS[lang];
+
 var imageObj = new Image();
 imageObj.onload = function () {
   var loading = document.getElementById("cardPreviewLoading");
@@ -15,21 +32,14 @@ imageObj.onload = function () {
 imageObj.onerror = function () {
   var loading = document.getElementById("cardPreviewLoading");
   if (loading) {
-    loading.textContent = "Could not load card image. Check your connection and try again.";
+    loading.textContent = S.loadError;
     loading.hidden = false;
   }
   console.error("Failed to load card image.");
 };
-var selectedCardId = "1";
-(function () {
-  var m = /[?&]card=(\d+)/.exec(window.location.search);
-  if (m) selectedCardId = m[1];
-  var urls = {
-    "1": "assets/images/Satorp - Ramadan Design (Employees greeting).png",
-    "2": "assets/images/new-design.jpg.jpeg"
-  };
-  imageObj.src = urls[selectedCardId] || urls["1"];
-})();
+
+var selectedCardId = getSelectedCardId();
+imageObj.src = getCardImageUrl(selectedCardId);
 
 var chosenMessage = null;
 var currentStep = 1;
@@ -134,9 +144,9 @@ function updateNameStepUI() {
 
 function buildMessageOptions() {
   var container = document.getElementById("messageOptions");
-  if (!container || typeof MESSAGES === "undefined" || !MESSAGES.en) return;
+  if (!container || typeof MESSAGES === "undefined" || !MESSAGES[lang]) return;
   container.innerHTML = "";
-  MESSAGES.en.forEach(function (text) {
+  MESSAGES[lang].forEach(function (text) {
     var btn = document.createElement("button");
     btn.type = "button";
     btn.className = "btn btn-outline-light message-option w-100";
@@ -198,16 +208,20 @@ function drawCardWithText(messageText, nameText) {
   context.drawImage(imageObj, 0, 0, canvasWidth, canvasHeight);
 
   context.textAlign = "center";
-  context.fillStyle = selectedCardId === "2" ? "#ffffff" : "#006E57";
+  context.fillStyle = "#2D378D";
+  context.shadowColor = "transparent";
+  context.shadowBlur = 0;
+  context.shadowOffsetX = 0;
+  context.shadowOffsetY = 0;
   var centerX = canvasWidth / 2;
-  var nameY = canvasHeight - 280;
+  var nameY = canvasHeight * 0.39;
   var messageMaxWidth = 820;
   var messageLineHeight = 44;
 
   if (messageText) {
     var maxMessageLines = 6;
-    var messageFontPt = 28;
-    var minMessageFontPt = 20;
+    var messageFontPt = 24;
+    var minMessageFontPt = 18;
 
     context.font = "300 " + messageFontPt + "pt Satorp";
     var messageLines = wrapCanvasText(context, messageText, messageMaxWidth);
@@ -219,16 +233,23 @@ function drawCardWithText(messageText, nameText) {
     }
 
     if (messageLines.length > maxMessageLines) messageLines = messageLines.slice(0, maxMessageLines);
-    var messageY = nameY - 80 - (messageLines.length - 1) * messageLineHeight;
+    var messageYOffset = isRTL ? 60 : 40;
+    var messageY = nameY + messageYOffset;
     for (var i = 0; i < messageLines.length; i++) {
       context.fillText(messageLines[i], centerX, messageY + i * messageLineHeight);
     }
   }
 
-  context.font = "300 35pt Satorp";
+  context.font = "300 30pt Satorp";
   if (nameText) {
-    context.fillText(nameText, centerX, nameY);
+    var nameYPos = messageText ? messageY + messageLines.length * messageLineHeight + 10 : nameY + 40;
+    context.fillText(nameText, centerX, nameYPos);
   }
+
+  context.shadowColor = "transparent";
+  context.shadowBlur = 0;
+  context.shadowOffsetX = 0;
+  context.shadowOffsetY = 0;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -246,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var step1Next = document.getElementById("step1Next");
   if (step1Next) step1Next.addEventListener("click", function () {
     if (!chosenMessage) {
-      alert("Please choose a message first.");
+      alert(S.chooseFirst);
       return;
     }
     showStep(2);
@@ -285,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (btn.disabled) return;
     var defaultHtml = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = "<span class=\"download-spinner\" aria-hidden=\"true\"></span> Generating your card…";
+    btn.innerHTML = S.generating;
     downloadCanvasAsImage(function () {
       btn.disabled = false;
       btn.innerHTML = defaultHtml;

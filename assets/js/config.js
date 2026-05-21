@@ -1,14 +1,28 @@
-/**
- * Single source of truth for greeting message options per language.
- * Used by the message-selection UI and by canvas rendering.
- */
 var MESSAGES = {
   en: [
-    "Wishing you a joyful Eid. May this blessed occasion bring you good health and happiness.",
-    "Wishing you a joyful Eid filled with health and wonderful moments with your loved ones."
+    "May Allah bless your Eid with love, goodness, and lasting joyful moments.",
+    "Wishing you an Eid filled with hope, prosperity, and blessings.",
+    "Happy Eid, wishing you continuous health, joy, and peace."
   ],
   ar: [
-    "كل عام وأنتم بخير، أعاده الله عليكم بالصحة والعافية، وجعل أيامكم مليئة بالخير والأُنس.",
-    "أتمنى لكم عيداً سعيداً تنعمون فيه بالصحة والعافية وتجمعكم فيه أجمل اللحظات مع من تحبون."
+    "أدام الله عليكم فرحة العيد، وجعل بيوتكم عامرةً بالمودة والمسرات.",
+    "أتمنى لكم عيد أضحى مبارك، تنعمون فيه بالبركة وتدوم فيه الأفراح.",
+    "كل عامٍ وانتم بخير، وأتمّ الله أيامكم بالنور والسعادة والطمأنينة."
   ]
 };
+
+var CARD_IMAGES = {
+  "1": "assets/images/Artboard 1.png",
+  "2": "assets/images/Artboard 2.png",
+  "3": "assets/images/Artboard 3.png",
+  "4": "assets/images/Artboard 4.png"
+};
+
+function getSelectedCardId() {
+  var m = /[?&]card=(\d+)/.exec(window.location.search);
+  return m ? m[1] : "1";
+}
+
+function getCardImageUrl(cardId) {
+  return CARD_IMAGES[cardId] || CARD_IMAGES["1"];
+}
